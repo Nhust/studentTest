@@ -23,7 +23,8 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
-				    	
+
+include 'studenttest.php';
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 						
@@ -32,4 +33,24 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 						
 header("Location: ../");
-exit;
+
+
+//On vérifie qu'une variable GET à été transmise
+if(isset($_GET['id_product']))
+{
+  
+    hookDisplayProductTab($_GET['id_product']);
+
+    echo "Description du produit :"$output;
+
+    hookDisplayAdminProductsExtra($_GET['id_product']);
+
+    echo "Formulaire pour la description :"$output2;
+  
+};
+else die("Référence produit inconnu");
+
+
+
+
+?>
