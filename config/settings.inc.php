@@ -1,8 +1,8 @@
 <?php
 define('_DB_SERVER_', 'localhost');
-define('_DB_NAME_', 'test');
+define('_DB_NAME_', 'studenttest');
 define('_DB_USER_', 'root');
-define('_DB_PASSWD_', 'root');
+define('_DB_PASSWD_', '');
 define('_DB_PREFIX_', 'ps_');
 define('_MYSQL_ENGINE_', 'InnoDB');
 define('_PS_CACHING_SYSTEM_', 'CacheMemcache');
@@ -14,3 +14,4 @@ if (!defined('_PS_VERSION_'))
 	define('_PS_VERSION_', '1.6.1.24');
 define('_RIJNDAEL_KEY_', '6EDdTkP3b0TOKbUiDCNW9JiBOpFUHsgw');
 define('_RIJNDAEL_IV_', 'x6NhzARifJmod+qORV9HtA==');
+

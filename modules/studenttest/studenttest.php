@@ -33,35 +33,54 @@ class StudentTest extends Module
     {
 
 
+        $formesc = 
+        
+        '<form action="#" method="post">
+        <div>
+            <label for="Sdesc">Quelle est la description du produit ?</label>
+            <input type="text" id="Sdesc" name="short_desc" value="desc">
+        </div>
+        <div>
+            <button name="submitAddCustomField">Envoyer mes salutations</button>
+        </div>
+       
+        </form>'
 
-        // return the html form
-        // the submit button must have submitAddCustomField as name to work
-        // the input text must have short_desc as name
+        if (isset($_POST["short_desc"])) {
+            $shortDesc = htmlspecialchars ($_POST['shortDesc']);
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+            $mysqli = new mysqli("test.lan", "root", "", "studenttest");
 
-        // instanciate the product class with the parameter get id_product
-        // save the value of the form short_desc on product class
-        // use the method save on product class to persist date in database
+            $mysqli->query("INSERT INTO ps_product (short_desc) VALUES ($shortDesc) WHERE id_product = $params");
+
+        };
+        else {
+
+        };
+
+
+        
 
 
 
-        $output = '';
-        return $output;
+        $output2 = $formesc;
+        return $output2;
     }
 
     public function hookDisplayProductTab($params)
     {
 
-        // Here you have to return the value of short_desc with some html integration
-        // instanciate the product class with the parameter get id_product
-        // Get the product category default
-        // instanciate the class Category with the field id_category_default from product class
-        // use method getProducts from category class to get all the product from the category
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $mysqli = new mysqli("test.lan", "root", "", "studenttest");
 
-        // return a html with the value with the 2 products you get
+        $sDesc = $mysqli->query("SELECT short_desc FROM ps_product WHERE id_product = $params");
 
-        return $output = '';
+        return $output = '<p>'$sDesc'</p>';
 
 
     }
 
 }
+
+
+?>
