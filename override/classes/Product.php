@@ -175,6 +175,7 @@ class Product extends ProductCore
 
     public $id_tax_rules_group = 1;
 
+    public $short_desc;
     /**
      * We keep this variable for retrocompatibility for themes
      * @deprecated 1.5.0
@@ -220,6 +221,7 @@ class Product extends ProductCore
             'cache_is_pack' =>                array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
             'cache_has_attachments' =>        array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
             'is_virtual' =>                array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+            'short_desc' =>                array('type' => self::TYPE_STRING),
 
             /* Shop fields */
             'id_category_default' =>        array('type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isUnsignedId'),

@@ -17,16 +17,13 @@ class StudentTest extends Module
 
         $this->displayName = $this->l('Module Student');
         $this->description = $this->l('Displays something in product page.');
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
     }
 
 
     public function install()
     {
         return
-            parent::install() && $this->registerHook('displayHeader')
-            && $this->registerhook('displayAdminProductsExtra')
-            && $this->registerhook('displayProductTab');
+            parent::install();
     }
 
     public function hookDisplayAdminProductsExtra($params)
@@ -41,10 +38,13 @@ class StudentTest extends Module
         // instanciate the product class with the parameter get id_product
         // save the value of the form short_desc on product class
         // use the method save on product class to persist date in database
+        $product = new Product($_GET['id_product']);
 
-
-
-        $output = '';
+        $output = '<form action="" method="POST">
+            <label for="">Short description</label>
+            <input type="text" name="short_desc" value="'.$product->short_desc.'">
+            <input type="submit" name="submitAddCustomField">
+        </form>';
         return $output;
     }
 
@@ -58,8 +58,35 @@ class StudentTest extends Module
         // use method getProducts from category class to get all the product from the category
 
         // return a html with the value with the 2 products you get
+        $product = new Product($_GET['id_product']);
 
-        return $output = '';
+        $cat = new Category($product->id_category_default);
+        $products = $cat->getProducts(1,1,3);
+
+        $st = '';
+        foreach($products as $item){
+
+            $st .= '
+            <div style="width:30%;">
+            <div><img src="http://test.lan/1-large_default/t-shirt-delave-manches-courtes.jpg" alt=""></div>
+            <div style="display: flex;align-items: center">
+                <div><p>'.$item["name"].'</p>
+                <p>'.$item["price"].' €</p></div>
+                <div style="padding-left:25px"><a href="#" style="background:#55c65e;color:#fff;padding: 3px 8px 4px">Add to cart</a></div>
+               
+            </div>
+            </div>';
+
+
+        }
+
+
+        return '<div>
+            <p>' . $product->short_desc . '</p>
+                </div>
+                <div style="overflow:scroll;width:100%;display:flex;justify-content: space-around">
+                ' . $st . '
+            </div>';
 
 
     }
